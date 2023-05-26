@@ -1,5 +1,5 @@
 async function init() {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/posts?_expand=user`);
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts?_expand=user&&_embed=comments`);
     const postsData = await response.json();
 
 const content = document.querySelector('#content');
@@ -23,7 +23,6 @@ function createPostsList(posts) {
                 const title = post.title;
                 postLinkElement.textContent = `Title: "${title}"`;
 
-                console.log(post.user.name)
 
                 const userLinkElement = document.createElement('a');
                 userLinkElement.href = './user.html';
@@ -31,7 +30,13 @@ function createPostsList(posts) {
                 userLinkElement.textContent = `Author: ${userName}`;
 
             
-                postsListElement.append(postLinkElement, userLinkElement);
+                
+                console.log(post.comments.length)
+                const commentsLengthElement = document.createElement('span');
+                const commentsLength = post.comments.length;
+                commentsLengthElement.textContent = ` Comments: ${commentsLength};`;
+
+                postsListElement.append(postLinkElement, commentsLengthElement, ' ', userLinkElement);
                 postsList.append(postsListElement);
             });
             return postsList;
