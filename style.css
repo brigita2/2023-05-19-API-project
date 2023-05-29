@@ -1,0 +1,16 @@
+.navigation-list {
+    display: flex;
+    list-style-type: none;
+    padding-left: 0;
+    gap: 10px 20px;
+}
+.navigation-list a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: black;
+    font-weight: 700;
+}
+.navigation-list a.meniu-link {
+    color: blue;
+    text-decoration: underline;
+}

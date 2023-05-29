@@ -1,26 +1,56 @@
 function getNavigation() {
+    const headerElement = document.createElement('header');
+
+
     const navigationWrapper = document.createElement('nav');
     navigationWrapper.classList.add('navigation-wrapper');
     
     const navigationList = document.createElement('ul');
     navigationList.classList.add('navigation-list');
 
-    const home = document.createElement('li');
-    home.innerHTML = `<a href="./index.html">Home</a>`;
-
-    const users = document.createElement('li');
-    users.innerHTML = `<a href="./users.html">Users</a>`;
-
-    const albums = document.createElement('li');
-    albums.innerHTML = `<a href="./albums.html">Albums</a>`;
-
-    const posts = document.createElement('li');
-    posts.innerHTML = `<a href="./posts.html">Posts</a>`;
     
+    
+    
+    headerElement.append(navigationWrapper);
+    navigationWrapper.append(navigationList);
+    document.body.prepend(headerElement);
+    
+    const meniuItems = [
+        {
+            title: 'Home',
+            path: 'index.html'
+        },
+        {
+            title: 'Posts',
+            path: 'posts.html'
+        },
+        {
+            title: 'Users',
+            path: 'users.html'
+        },
+        {
+            title: 'Albums',
+            path: 'albums.html'
+        }
+    ];
 
-   navigationList.append(home, users, albums, posts);
-   document.body.prepend(navigationWrapper);
-   navigationWrapper.append(navigationList);
+    meniuItems.forEach(item => {
+        let { title, path } = item;
+
+        const navigationItem = document.createElement('li');
+        navigationList.append(navigationItem);
+
+        const meniuLink = document.createElement('a');
+
+        if (location.pathname === '/' + path) {        //console.dir(location.pathname) yra puslapio adreso dalis /posts.html
+            meniuLink.classList.add('meniu-link');
+        }
+        navigationItem.append(meniuLink);
+        meniuLink.textContent = title;
+        meniuLink.href = './' + path;
+    })
+    
+   
 
   }
   getNavigation()
